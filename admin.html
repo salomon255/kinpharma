@@ -1,0 +1,628 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Produits</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFFFFF;
+            background-image: radial-gradient(rgba(200, 230, 200, 0.4) 0.75px, transparent 0.75px); 
+            background-size: 22px 22px; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #343A40; 
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.98); 
+            backdrop-filter: blur(5px); 
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05); 
+            padding: 30px;
+            width: 100%;
+            max-width: 650px;
+            border: 1px solid #D4EDDA; 
+        }
+
+        h1 {
+            text-align: center;
+            color: #333; 
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #1E7E34, #28a745);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .edit-section {
+            background: #F8F9FA; 
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #E9F5EC; 
+        }
+        .edit-section h2 {
+            font-size: 1.5rem;
+            color: #1E7E34; 
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .edit-controls {
+            display: flex;
+            gap: 10px; /* Réduit un peu le gap pour 3 boutons */
+            align-items: center;
+        }
+        .edit-controls select {
+            flex-grow: 1;
+        }
+         .edit-controls button { 
+            padding: 12px 15px; /* Ajusté pour potentiellement 3 boutons */
+            font-size: 0.9rem; /* Légèrement réduit */
+            width: auto;
+            flex-shrink: 0;
+            background: #FFFFFF;
+            color: #28a745;
+            border: 1px solid #28a745;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+            border-radius: 8px; /* Cohérence */
+        }
+        .edit-controls button:hover {
+            background: #E9F5EC;
+            color: #1E7E34;
+            box-shadow: 0 3px 8px rgba(40, 167, 69, 0.1);
+        }
+        /* Style spécifique pour le bouton Supprimer */
+        .edit-controls button#deleteProductBtn {
+            color: #DC3545; /* Rouge */
+            border-color: #DC3545;
+        }
+        .edit-controls button#deleteProductBtn:hover {
+            background: rgba(220, 53, 69, 0.1); /* Fond rouge clair */
+            color: #a71d2a; /* Rouge foncé */
+            box-shadow: 0 3px 8px rgba(220, 53, 69, 0.15);
+        }
+
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #495057; 
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #D4EDDA; 
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #F8F9FA; 
+            color: #343A40; 
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #28a745; 
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1); 
+            transform: translateY(-1px);
+        }
+        
+        input[type="file"] {
+            padding: 8px; 
+        }
+
+        input[type="file"]::file-selector-button {
+            margin-right: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #1E7E34;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button#submitBtn { 
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #28a745, #20893A);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button#cancelEditBtn { 
+            background: #FFFFFF;
+            color: #6C757D; 
+            border: 1px solid #CED4DA; 
+            margin-top: 10px;
+        }
+        button#cancelEditBtn:hover {
+            background: #F8F9FA;
+            color: #495057;
+            border-color: #ADB5BD;
+            box-shadow: 0 5px 10px rgba(0,0,0, 0.1);
+        }
+
+        /* S'applique à submitBtn et cancelEditBtn si pas surchargé par des styles plus spécifiques */
+        #productForm button:hover { 
+            transform: translateY(-2px);
+            /* Ombre par défaut pour submitBtn, cancelEditBtn a sa propre ombre au survol */
+             /* box-shadow: 0 10px 20px rgba(40, 167, 69, 0.2);  */
+        }
+        button:active { transform: translateY(0px); }
+        button:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none !important; }
+
+        .success-message, .error-message {
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: white; 
+        }
+        .success-message {
+            background: linear-gradient(135deg, #28a745, #20893A); 
+        }
+        .error-message {
+            background: linear-gradient(135deg, #dc3545, #c82333); 
+        }
+
+        .loading {
+            display: inline-block; /* Pour que le spinner soit à côté du texte */
+            width: 18px; height: 18px;
+            border: 2px solid rgba(255,255,255,0.3); 
+            border-top-color: #FFFFFF; 
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            vertical-align: middle; /* Aligner avec le texte */
+            margin-right: 8px;
+        }
+        @keyframes spin { 0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);} }
+
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .current-image-preview {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #495057;
+        }
+        .current-image-preview img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 8px;
+            margin-top: 5px;
+            display: block;
+            border: 1px solid #D4EDDA; 
+        }
+
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .container { padding: 20px 15px; }
+            h1 { font-size: 1.8rem; }
+            .edit-controls { flex-direction: column; }
+            .edit-controls button, .edit-controls select { width: 100%; } /* Assurer que le select prend aussi toute la largeur */
+            .edit-controls button { margin-top: 5px; } /* Petit espace si empilé */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="formTitle">Ajouter un Produit</h1>
+        
+        <div id="successMessage" class="success-message" style="display:none;"></div>
+        <div id="errorMessage" class="error-message" style="display:none;"></div>
+
+        <div class="edit-section">
+            <h2>Modifier/Supprimer un Produit</h2> <!-- Titre mis à jour -->
+            <div class="edit-controls">
+                <select id="selectProductToEdit" name="selectProductToEdit">
+                    <option value="">-- Sélectionner un produit --</option>
+                </select>
+                <button type="button" id="loadProductBtn">Charger</button>
+                <!-- AJOUT HTML: Bouton Supprimer -->
+                <button type="button" id="deleteProductBtn" style="display:none;">Supprimer</button>
+            </div>
+        </div>
+
+        <form id="productForm">
+            <input type="hidden" id="editingProductId" name="editingProductId">
+            <input type="hidden" id="currentImageUrl" name="currentImageUrl">
+
+            <div class="form-group">
+                <label for="nom">Nom du produit *</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Décrivez votre produit..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="categorie_nom">Catégorie *</label>
+                <select id="categorie_nom" name="categorie_nom" required>
+                    <option value="">-- Choisir une catégorie --</option>
+                    <option value="Pharmaceutique">Pharmaceutique</option>
+                    <option value="Parapharmaceutique">Parapharmaceutique</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="prix">Prix (€) *</label>
+                    <input type="number" id="prix" name="prix" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock *</label>
+                    <input type="number" id="stock" name="stock" min="0" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="image_file">Image du produit</label>
+                <input type="file" id="image_file" name="image_file" accept="image/*">
+                <div id="currentImagePreview" class="current-image-preview" style="display:none;">
+                    Image actuelle: <img id="imgPreviewSrc" src="#" alt="Aperçu image">
+                    <small>(Laissez vide pour conserver l'image actuelle)</small>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Ajouter le produit</button>
+            <button type="button" id="cancelEditBtn" style="display:none;">Annuler la modification</button>
+        </form>
+    </div>
+
+    <script>
+        const supabaseUrl = 'https://lnpwosbtodwnpyoaexjn.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxucHdvc2J0b2R3bnB5b2FleGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNDgzNjUsImV4cCI6MjA2MjYyNDM2NX0.Frhd5AXpZRhRnTFup695TLlNhQ0h_NL0w-RohG5P8rA';
+        
+        const { createClient } = supabase;
+        const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+        const form = document.getElementById('productForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessageEl = document.getElementById('successMessage');
+        const errorMessageEl = document.getElementById('errorMessage');
+        const formTitle = document.getElementById('formTitle');
+        const selectProductToEdit = document.getElementById('selectProductToEdit');
+        const loadProductBtn = document.getElementById('loadProductBtn');
+        const editingProductIdField = document.getElementById('editingProductId');
+        const currentImageUrlField = document.getElementById('currentImageUrl'); 
+        const currentImagePreviewDiv = document.getElementById('currentImagePreview');
+        const imgPreviewSrc = document.getElementById('imgPreviewSrc');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const deleteProductBtn = document.getElementById('deleteProductBtn'); // AJOUT JS: Référence au bouton supprimer
+
+
+        const STORAGE_BUCKET_NAME = 'product-images';
+        let isEditing = false;
+
+        function showMessage(element, message = '', isSuccess = true) {
+            element.textContent = message || (isSuccess ? 'Opération réussie !' : 'Une erreur est survenue.');
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        function hideMessages() {
+            successMessageEl.style.display = 'none';
+            errorMessageEl.style.display = 'none';
+        }
+
+        function resetFormAndSwitchToAddMode() {
+            form.reset();
+            editingProductIdField.value = '';
+            currentImageUrlField.value = '';
+            isEditing = false;
+            formTitle.textContent = 'Ajouter un Produit';
+            submitBtn.innerHTML = 'Ajouter le produit';
+            currentImagePreviewDiv.style.display = 'none';
+            imgPreviewSrc.src = '#';
+            cancelEditBtn.style.display = 'none';
+            deleteProductBtn.style.display = 'none'; // AJOUT JS: Cacher bouton supprimer
+            selectProductToEdit.value = ""; 
+            submitBtn.disabled = false; // S'assurer que le bouton n'est pas désactivé
+            loadProductBtn.disabled = false;
+            if (deleteProductBtn) deleteProductBtn.disabled = false;
+
+        }
+
+        async function loadProductsForSelection() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('produits')
+                    .select('id, nom')
+                    .order('nom', { ascending: true });
+
+                if (error) throw error;
+
+                selectProductToEdit.innerHTML = '<option value="">-- Sélectionner un produit --</option>'; 
+                data.forEach(product => {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = product.nom;
+                    selectProductToEdit.appendChild(option);
+                });
+            } catch (error) {
+                console.error("Erreur chargement produits pour sélection:", error);
+                showMessage(errorMessageEl, "Impossible de charger la liste des produits.", false);
+            }
+        }
+
+        async function populateFormForEdit(productId) {
+            hideMessages();
+            try {
+                const { data: product, error } = await supabaseClient
+                    .from('produits')
+                    .select('*')
+                    .eq('id', productId)
+                    .single();
+
+                if (error) throw error;
+                if (!product) {
+                    showMessage(errorMessageEl, "Produit non trouvé.", false);
+                    resetFormAndSwitchToAddMode(); // Réinitialiser si produit non trouvé
+                    return;
+                }
+
+                form.nom.value = product.nom || '';
+                form.description.value = product.description || '';
+                form.categorie_nom.value = product.categorie_nom || '';
+                form.prix.value = product.prix || 0;
+                form.stock.value = product.stock || 0;
+                
+                editingProductIdField.value = product.id;
+                currentImageUrlField.value = product.image_url || ''; 
+
+                if (product.image_url) {
+                    imgPreviewSrc.src = product.image_url;
+                    currentImagePreviewDiv.style.display = 'block';
+                } else {
+                    currentImagePreviewDiv.style.display = 'none';
+                }
+                
+                isEditing = true;
+                formTitle.textContent = 'Modifier le Produit';
+                submitBtn.innerHTML = 'Modifier le produit';
+                cancelEditBtn.style.display = 'block';
+                deleteProductBtn.style.display = 'inline-block'; // AJOUT JS: Afficher bouton supprimer
+
+            } catch (error) {
+                console.error("Erreur chargement produit pour édition:", error);
+                showMessage(errorMessageEl, "Erreur lors du chargement des détails du produit.", false);
+                resetFormAndSwitchToAddMode();
+            }
+        }
+
+        loadProductBtn.addEventListener('click', () => {
+            const selectedId = selectProductToEdit.value;
+            if (selectedId) {
+                populateFormForEdit(selectedId);
+            } else {
+                // Si rien n'est sélectionné, on s'assure d'être en mode ajout
+                resetFormAndSwitchToAddMode(); 
+            }
+        });
+        
+        // AJOUT JS: Écouteur pour le changement dans le select
+        selectProductToEdit.addEventListener('change', () => {
+            const selectedId = selectProductToEdit.value;
+            if (selectedId) {
+                // populateFormForEdit(selectedId); // On charge via le bouton "Charger"
+            } else {
+                // Si l'option "-- Sélectionner --" est choisie, réinitialiser
+                resetFormAndSwitchToAddMode();
+            }
+        });
+
+
+        cancelEditBtn.addEventListener('click', resetFormAndSwitchToAddMode);
+
+        // AJOUT JS: Fonction de suppression
+        deleteProductBtn.addEventListener('click', async () => {
+            const productIdToDelete = editingProductIdField.value;
+            const productName = form.nom.value || "ce produit"; // Pour le message de confirmation
+
+            if (!productIdToDelete) {
+                showMessage(errorMessageEl, "Aucun produit n'est actuellement sélectionné pour la suppression.", false);
+                return;
+            }
+
+            if (!confirm(`Êtes-vous sûr de vouloir supprimer "${productName}" ? Cette action est irréversible.`)) {
+                return;
+            }
+            
+            hideMessages();
+            const originalButtonText = deleteProductBtn.textContent;
+            deleteProductBtn.disabled = true;
+            deleteProductBtn.innerHTML = `<div class="loading"></div> Suppression...`;
+            submitBtn.disabled = true; // Désactiver aussi le bouton modifier/ajouter pendant la suppression
+            loadProductBtn.disabled = true;
+
+
+            try {
+                // 1. Supprimer l'image du storage si elle existe
+                const imageUrlToDelete = currentImageUrlField.value;
+                if (imageUrlToDelete) {
+                    const fileName = imageUrlToDelete.split('/').pop();
+                    if (fileName) {
+                        const { error: storageError } = await supabaseClient.storage
+                            .from(STORAGE_BUCKET_NAME)
+                            .remove([`public/${fileName}`]);
+                        // On ne bloque pas si l'erreur de suppression d'image, mais on la log
+                        if (storageError) console.warn("Erreur suppression image storage:", storageError);
+                    }
+                }
+
+                // 2. Supprimer le produit de la base de données
+                const { error: dbError } = await supabaseClient
+                    .from('produits')
+                    .delete()
+                    .eq('id', productIdToDelete);
+
+                if (dbError) throw dbError;
+
+                showMessage(successMessageEl, `Produit "${productName}" supprimé avec succès !`, true);
+                resetFormAndSwitchToAddMode();
+                loadProductsForSelection(); // Recharger la liste
+
+            } catch (error) {
+                console.error('Erreur suppression produit:', error);
+                showMessage(errorMessageEl, `Erreur lors de la suppression du produit: ${error.message}`, false);
+            } finally {
+                deleteProductBtn.disabled = false;
+                deleteProductBtn.innerHTML = originalButtonText;
+                submitBtn.disabled = false; // Réactiver
+                loadProductBtn.disabled = false;
+                 // S'assurer que le bouton supprimer est caché si on est revenu en mode ajout
+                if (!editingProductIdField.value) {
+                    deleteProductBtn.style.display = 'none';
+                }
+            }
+        });
+
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideMessages();
+            
+            const originalButtonText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<div class="loading"></div> ${isEditing ? 'Modification' : 'Ajout'} en cours...`;
+            if (deleteProductBtn) deleteProductBtn.disabled = true;
+            loadProductBtn.disabled = true;
+
+
+            try {
+                const formData = new FormData(form);
+                const imageFile = formData.get('image_file');
+                let finalImageUrl = isEditing ? currentImageUrlField.value : null; 
+
+                if (imageFile && imageFile.size > 0) {
+                    if (imageFile.size > 5 * 1024 * 1024) throw new Error("L'image ne doit pas dépasser 5MB.");
+                    
+                    const fileName = `${Date.now()}-${imageFile.name.replace(/\s+/g, '_')}`; 
+                    const filePath = `public/${fileName}`;
+
+                    if (isEditing && currentImageUrlField.value && finalImageUrl !== currentImageUrlField.value) { // Si on change l'image
+                        const oldFileName = currentImageUrlField.value.split('/').pop();
+                        if (oldFileName) {
+                            await supabaseClient.storage.from(STORAGE_BUCKET_NAME).remove([`public/${oldFileName}`]);
+                        }
+                    }
+
+                    const { data: uploadData, error: uploadError } = await supabaseClient.storage
+                        .from(STORAGE_BUCKET_NAME)
+                        .upload(filePath, imageFile, { cacheControl: '3600', upsert: false }); 
+
+                    if (uploadError) throw new Error(`Erreur Storage: ${uploadError.message}`);
+                    
+                    const { data: publicUrlData } = supabaseClient.storage
+                        .from(STORAGE_BUCKET_NAME)
+                        .getPublicUrl(filePath);
+                    
+                    if (!publicUrlData || !publicUrlData.publicUrl) throw new Error("URL publique image vide.");
+                    finalImageUrl = publicUrlData.publicUrl;
+                }
+
+                const productData = {
+                    nom: formData.get('nom').trim(),
+                    description: formData.get('description').trim() || null,
+                    categorie_nom: formData.get('categorie_nom'), 
+                    prix: parseFloat(formData.get('prix')),
+                    stock: parseInt(formData.get('stock')),
+                    image_url: finalImageUrl // Toujours inclure image_url, sera null si pas d'image
+                };
+                
+                if (!productData.nom) throw new Error('Le nom du produit est requis');
+                if (!productData.categorie_nom) throw new Error('La catégorie est requise');
+                if (isNaN(productData.prix) || productData.prix < 0) throw new Error('Le prix doit être un nombre positif');
+                if (isNaN(productData.stock) || productData.stock < 0) throw new Error('Le stock doit être un nombre entier positif');
+                
+                let responseError;
+
+                if (isEditing) {
+                    const idToUpdate = editingProductIdField.value;
+                    if (!idToUpdate) throw new Error("ID du produit manquant pour la modification.");
+                    
+                    const { error } = await supabaseClient
+                        .from('produits')
+                        .update(productData)
+                        .eq('id', idToUpdate);
+                    responseError = error;
+                } else {
+                    const { error } = await supabaseClient
+                        .from('produits') 
+                        .insert([productData]);
+                    responseError = error;
+                }
+
+                if (responseError) throw responseError;
+
+                showMessage(successMessageEl, `Produit ${isEditing ? 'modifié' : 'ajouté'} avec succès !`, true);
+                resetFormAndSwitchToAddMode(); 
+                loadProductsForSelection(); 
+
+            } catch (error) {
+                console.error('Erreur:', error);
+                let errorMsg = error.message || 'Une erreur s\'est produite. Veuillez réessayer.';
+                if (error.message && error.message.includes('duplicate key') && error.message.includes('produits_nom_key')) {
+                    errorMsg = 'Un produit avec ce nom existe déjà.';
+                }
+                showMessage(errorMessageEl, errorMsg, false);
+            } finally {
+                submitBtn.disabled = false;
+                if (deleteProductBtn) deleteProductBtn.disabled = false;
+                loadProductBtn.disabled = false;
+
+                if (editingProductIdField.value && isEditing) { 
+                     submitBtn.innerHTML = 'Modifier le produit';
+                } else {
+                    submitBtn.innerHTML = 'Ajouter le produit';
+                }
+            }
+        });
+
+        document.getElementById('prix').addEventListener('input', function() { if (this.value < 0) this.value = 0; });
+        document.getElementById('stock').addEventListener('input', function() { if (this.value < 0) this.value = 0; });
+
+        loadProductsForSelection();
+    </script>
+</body>
+</html>
