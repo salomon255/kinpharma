@@ -10,12 +10,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            /* MODIFIÉ: Thème vert/blanc */
             background-color: #FFFFFF;
-            background-image: radial-gradient(rgba(200, 230, 200, 0.4) 0.75px, transparent 0.75px); 
-            background-size: 22px 22px; 
+            background-image: radial-gradient(rgba(200, 230, 200, 0.4) 0.75px, transparent 0.75px);
+            background-size: 22px 22px;
             min-height: 100vh;
-            color: #343A40; /* MODIFIÉ: Couleur de texte par défaut */
+            color: #343A40;
             padding: 20px;
             display: flex;
             align-items: center;
@@ -25,13 +24,12 @@
         .container {
             max-width: 700px;
             width: 100%;
-            /* MODIFIÉ: Fond blanc et bordure verte claire */
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(5px); 
+            backdrop-filter: blur(5px);
             border: 1px solid #D4EDDA;
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); /* MODIFIÉ: Ombre plus douce */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
         }
 
         h1 {
@@ -39,50 +37,48 @@
             font-size: 2.2rem;
             margin-bottom: 25px;
             font-weight: 700;
-            /* MODIFIÉ: Dégradé de verts */
             background: linear-gradient(135deg, #1E7E34, #28a745);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        h1 i { 
-            color: #28a745; /* MODIFIÉ: Icône verte */
-            margin-right: 10px; 
+        h1 i {
+            color: #28a745;
+            margin-right: 10px;
         }
 
         .order-summary {
             margin-bottom: 30px;
             padding: 20px;
-            background: #F8F9FA; /* MODIFIÉ: Fond blanc cassé */
+            background: #F8F9FA;
             border-radius: 10px;
-            border: 1px solid #E9F5EC; /* MODIFIÉ: Bordure verte très claire */
+            border: 1px solid #E9F5EC;
         }
-        .order-summary h2 { 
-            font-size: 1.5rem; 
-            margin-bottom: 15px; 
-            color: #1E7E34; /* MODIFIÉ: Texte vert foncé */
+        .order-summary h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1E7E34;
         }
-        .summary-item { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 8px; 
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
             font-size: 0.95rem;
         }
-        .summary-item span:first-child { color: #495057; } /* MODIFIÉ: Texte gris moyen */
-        .summary-item span:last-child { color: #28a745; font-weight: 500; } /* MODIFIÉ: Texte vert pour le prix */
+        .summary-item span:first-child { color: #495057; }
+        .summary-item span:last-child { color: #28a745; font-weight: 500; }
 
-        .summary-total { 
-            font-size: 1.3rem; 
-            font-weight: bold; 
-            margin-top: 15px; 
-            border-top: 1px solid #E9F5EC; /* MODIFIÉ: Bordure verte très claire */
+        .summary-total {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 15px;
+            border-top: 1px solid #E9F5EC;
             padding-top: 10px;
-            color: #1E7E34; /* MODIFIÉ: Texte vert foncé */
+            color: #1E7E34;
         }
-         .summary-total span:last-child { /* Le montant total */
-            color: #28a745; /* Vert plus vif */
+         .summary-total span:last-child {
+            color: #28a745;
         }
-
 
         .checkout-form .form-group { margin-bottom: 20px; }
         .checkout-form label {
@@ -90,25 +86,25 @@
             margin-bottom: 8px;
             font-weight: 600;
             font-size: 1rem;
-            color: #495057; /* MODIFIÉ: Gris moyen */
+            color: #495057;
         }
         .checkout-form input[type="text"],
         .checkout-form input[type="email"],
         .checkout-form textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #D4EDDA; /* MODIFIÉ: Bordure verte claire */
+            border: 1px solid #D4EDDA;
             border-radius: 8px;
-            background: #F8F9FA; /* MODIFIÉ: Fond blanc cassé */
-            color: #343A40; /* MODIFIÉ: Texte gris foncé */
+            background: #F8F9FA;
+            color: #343A40;
             font-size: 1rem;
         }
         .checkout-form input[type="text"]:focus,
         .checkout-form input[type="email"]:focus,
         .checkout-form textarea:focus {
             outline: none;
-            border-color: #28a745; /* MODIFIÉ: Bordure verte au focus */
-            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1); /* MODIFIÉ: Ombre verte */
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
         }
         .checkout-form textarea { min-height: 80px; resize: vertical; }
 
@@ -118,7 +114,6 @@
             padding: 15px;
             border: none;
             border-radius: 10px;
-            /* MODIFIÉ: Dégradé de verts */
             background: linear-gradient(45deg, #28a745, #20893A);
             color: white;
             font-size: 1.1rem;
@@ -126,56 +121,53 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .btn-submit:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.25); /* MODIFIÉ: Ombre verte */
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.25);
         }
-        .btn-submit:disabled { 
-            background: #CED4DA; /* MODIFIÉ: Gris clair */
-            color: #6C757D; /* Texte gris moyen */
-            opacity: 1; 
-            cursor: not-allowed; 
+        .btn-submit:disabled {
+            background: #CED4DA;
+            color: #6C757D;
+            opacity: 1;
+            cursor: not-allowed;
             box-shadow: none;
         }
-        .btn-submit .fa-spinner { 
-            margin-left: 8px; 
-            color: white; /* Assurer que le spinner est blanc */
+        .btn-submit .fa-spinner {
+            margin-left: 8px;
+            color: white;
         }
-
 
         .back-to-cart {
             display: block;
             text-align: center;
             margin-top: 20px;
-            color: #28a745; /* MODIFIÉ: Texte vert */
+            color: #28a745;
             text-decoration: none;
             font-size: 0.9rem;
         }
-        .back-to-cart:hover { color: #1E7E34; text-decoration: underline; } /* Vert foncé au survol */
+        .back-to-cart:hover { color: #1E7E34; text-decoration: underline; }
 
         .thank-you-message {
             text-align: center;
             padding: 40px 20px;
         }
-        .thank-you-message i { font-size: 3rem; color: #28a745; margin-bottom: 20px; } /* MODIFIÉ: Icône check verte */
-        .thank-you-message h2 { font-size: 1.8rem; margin-bottom: 15px; color: #1E7E34;} /* MODIFIÉ: Vert foncé */
-        .thank-you-message p { font-size: 1.1rem; margin-bottom: 25px; color: #495057; } /* MODIFIÉ: Gris moyen */
-        .thank-you-message .btn { /* Bouton "Retour à l'accueil" */
+        .thank-you-message i { font-size: 3rem; color: #28a745; margin-bottom: 20px; }
+        .thank-you-message h2 { font-size: 1.8rem; margin-bottom: 15px; color: #1E7E34;}
+        .thank-you-message p { font-size: 1.1rem; margin-bottom: 25px; color: #495057; }
+        .thank-you-message .btn {
             padding: 12px 25px; border-radius: 10px; font-size: 1rem; font-weight: 600;
             text-decoration: none; color: white; cursor: pointer; transition: all 0.3s ease;
-            border: none; 
-            /* MODIFIÉ: Dégradé de verts (similaire au bouton admin) */
-            background: linear-gradient(45deg, #28a745, #20893A); 
+            border: none;
+            background: linear-gradient(45deg, #28a745, #20893A);
             display: inline-block;
         }
         .thank-you-message .btn:hover {
-             transform: translateY(-2px); 
+             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(40, 167, 69, 0.25);
         }
 
         .error-notice {
-            /* MODIFIÉ: Rouge un peu plus doux mais toujours distinct */
-            background-color: rgba(220, 53, 69, 0.9); 
+            background-color: rgba(220, 53, 69, 0.9);
             color: white;
             padding: 10px 15px;
             border-radius: 8px;
@@ -184,11 +176,112 @@
             font-weight: 500;
         }
 
+        #paymentModalOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        #paymentModal {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            color: #343A40;
+        }
+        #paymentModal h2 {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #1E7E34;
+        }
+        #modalCloseButton {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #6C757D;
+        }
+        #modalCloseButton:hover {
+            color: #343A40;
+        }
+        .modal-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .modal-btn:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            transform: translateY(-1px);
+        }
+        .modal-btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+        .modal-btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        #paymentModal .form-group { margin-bottom: 15px; }
+        #paymentModal label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #495057;
+        }
+        #paymentModal input[type="tel"],
+        #paymentModal input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #D4EDDA;
+            border-radius: 6px;
+            background: #F8F9FA;
+            color: #343A40;
+            font-size: 1rem;
+        }
+        #paymentModal input[type="tel"]:focus,
+        #paymentModal input[type="text"]:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+        #modalErrorNotice { margin-top: 15px !important; }
+
 
          @media (max-width: 768px) {
             .container { padding: 20px; margin-top: 20px; margin-bottom: 20px; }
             h1 { font-size: 1.8rem; }
             .order-summary h2 { font-size: 1.3rem; }
+            #paymentModal { padding: 20px; }
+            #paymentModal h2 { font-size: 1.4rem; }
+            #modalCloseButton { top: 8px; right: 10px; }
          }
 
     </style>
@@ -199,9 +292,8 @@
         <div id="errorNotice" class="error-notice" style="display: none;"></div>
 
         <div class="order-summary" id="orderSummary">
-            <h2>Récapitulatif</h2> <!-- Titre plus générique -->
+            <h2>Recapitulatif</h2>
             <div id="summaryItemsList">
-                <!-- Les articles seront listés ici -->
             </div>
             <div class="summary-item summary-total">
                 <span>Total Commande:</span>
@@ -209,6 +301,7 @@
             </div>
         </div>
 
+        <!-- Formulaire simplifi�, sans action FormSubmit -->
         <form class="checkout-form" id="checkoutForm">
             <div class="form-group">
                 <label for="fullName">Nom complet *</label>
@@ -220,8 +313,9 @@
             </div>
             <div class="form-group">
                 <label for="address">Adresse de livraison</label>
-                <textarea id="address" name="address" placeholder="Votre adresse complète..."></textarea>
+                <textarea id="address" name="address" placeholder="Votre adresse complete..."></textarea>
             </div>
+            <!-- Le bouton type="submit" d�clenchera l'ouverture du modal de paiement -->
             <button type="submit" class="btn-submit" id="submitOrderButton">Passer la commande</button>
         </form>
         <a href="cart.html" class="back-to-cart"><i class="fas fa-arrow-left"></i> Retour au panier</a>
@@ -231,9 +325,17 @@
         <div class="thank-you-message">
             <i class="fas fa-check-circle"></i>
             <h2>Merci pour votre commande !</h2>
-            <p>Votre commande a été passée avec succès. Nous vous enverrons bientôt une confirmation par e-mail.</p>
-            <p>Numéro de commande (simulé): <strong id="simulatedOrderNumber"></strong></p>
-            <a href="index.html" class="btn">Retour à l'accueil</a>
+            <p>Votre commande a ete passee avec succes. Vous recevrez une notification.</p>
+            <p>Numero de commande (simule): <strong id="simulatedOrderNumber"></strong></p>
+            <a href="index.html" class="btn">Retour a l'accueil</a>
+        </div>
+    </div>
+
+    <div id="paymentModalOverlay" style="display: none;">
+        <div id="paymentModal">
+            <button id="modalCloseButton">�</button>
+            <div id="modalContentContainer">
+            </div>
         </div>
     </div>
 
@@ -244,7 +346,6 @@
         const { createClient } = supabase;
         const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-
         const orderSummaryList = document.getElementById('summaryItemsList');
         const summaryTotalAmountElement = document.getElementById('summaryTotalAmount');
         const checkoutForm = document.getElementById('checkoutForm');
@@ -254,53 +355,79 @@
         const submitOrderButton = document.getElementById('submitOrderButton');
         const errorNoticeElement = document.getElementById('errorNotice');
 
+        const paymentModalOverlay = document.getElementById('paymentModalOverlay');
+        const modalContentContainer = document.getElementById('modalContentContainer');
+        const modalCloseButtonElement = document.getElementById('modalCloseButton');
+
         let cart = [];
+        let currentOrderTotal = 0;
+
+        modalCloseButtonElement.addEventListener('click', closeModal);
+        paymentModalOverlay.addEventListener('click', (event) => {
+            if (event.target === paymentModalOverlay) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            paymentModalOverlay.style.display = 'none';
+            modalContentContainer.innerHTML = '';
+            if(submitOrderButton) submitOrderButton.disabled = false;
+            const validatePaymentBtn = document.getElementById('validateModalPaymentButton');
+            if (validatePaymentBtn) {
+                validatePaymentBtn.disabled = false;
+                validatePaymentBtn.innerHTML = 'Valider le paiement';
+            }
+        }
 
         function loadCartFromStorage() {
             const cartData = localStorage.getItem('shoppingCart');
             cart = cartData ? JSON.parse(cartData) : [];
             if (cart.length === 0 && window.location.pathname.includes('checkout.html')) {
-                alert("Votre panier est vide. Vous allez être redirigé vers l'accueil.");
-                window.location.href = 'index.html';
+                if (!thankYouContainer || thankYouContainer.style.display === 'none') {
+                    alert("Votre panier est vide. Vous allez etre redirige vers l'accueil.");
+                    window.location.href = 'index.html';
+                }
             }
         }
-        
+
         function calculateTotal() {
             return cart.reduce((total, item) => {
                 const price = parseFloat(item.prix) || 0;
-                return total + (price * item.quantity);
+                const quantity = parseInt(item.quantity) || 1;
+                return total + (price * quantity);
             }, 0);
         }
 
         function renderOrderSummary() {
             loadCartFromStorage();
-            orderSummaryList.innerHTML = ''; 
+            orderSummaryList.innerHTML = '';
 
-            if (cart.length === 0 && document.getElementById('orderSummary')) { // S'assurer que l'élément existe
-                document.getElementById('orderSummary').innerHTML = "<p>Aucun article à commander.</p>";
-                submitOrderButton.disabled = true;
+            if (cart.length === 0 && document.getElementById('orderSummary')) {
+                document.getElementById('orderSummary').innerHTML = "<p>Aucun article a commander.</p>";
+                if(submitOrderButton) submitOrderButton.disabled = true;
                 return;
             }
-            submitOrderButton.disabled = false;
+            if(submitOrderButton) submitOrderButton.disabled = false;
 
             cart.forEach(item => {
                 const summaryItem = document.createElement('div');
                 summaryItem.classList.add('summary-item');
-                
+
                 const textSpan = document.createElement('span');
-                textSpan.textContent = ${item.nom || 'Article'} (x${item.quantity || 1});
-                
+                textSpan.textContent = `${item.nom || 'Article'} (x${item.quantity || 1})`;
+
                 const price = parseFloat(item.prix) || 0;
                 const quantity = parseInt(item.quantity, 10) || 1;
                 const priceSpan = document.createElement('span');
-                priceSpan.textContent = $${(price * quantity).toFixed(2)};
-                
+                priceSpan.textContent = `$${(price * quantity).toFixed(2)}`;
+
                 summaryItem.appendChild(textSpan);
                 summaryItem.appendChild(priceSpan);
                 orderSummaryList.appendChild(summaryItem);
             });
 
-            summaryTotalAmountElement.textContent = $${calculateTotal().toFixed(2)};
+            summaryTotalAmountElement.textContent = `$${calculateTotal().toFixed(2)}`;
         }
 
         async function updateStockForOrderItem(item) {
@@ -311,16 +438,16 @@
                 .single();
 
             if (fetchError) {
-                console.error(Erreur lors de la récupération du stock pour ${item.nom}:, fetchError);
-                throw new Error(Impossible de vérifier le stock pour ${item.nom}.);
+                console.error(`Erreur lors de la recuperation du stock pour ${item.nom}:`, fetchError);
+                throw new Error(`Impossible de verifier le stock pour ${item.nom}.`);
             }
 
             const currentStock = parseInt(currentProduct ? currentProduct.stock : 0, 10);
             const quantityToOrder = parseInt(item.quantity, 10);
 
             if (currentStock < quantityToOrder) {
-                console.error(Stock insuffisant pour ${item.nom}. Demandé: ${quantityToOrder}, Disponible: ${currentStock});
-                throw new Error(Stock insuffisant pour ${item.nom}. ${currentStock > 0 ? Il ne reste que ${currentStock} exemplaire(s). : 'Cet article est épuisé.'} La commande ne peut pas être finalisée.);
+                console.error(`Stock insuffisant pour ${item.nom}. Demande: ${quantityToOrder}, Disponible: ${currentStock}`);
+                throw new Error(`Stock insuffisant pour ${item.nom}. ${currentStock > 0 ? `Il ne reste que ${currentStock} exemplaire(s).` : 'Cet article est epuise.'} La commande ne peut pas etre finalisee.`);
             }
 
             const newStock = currentStock - quantityToOrder;
@@ -330,23 +457,162 @@
                 .eq('id', item.id);
 
             if (updateError) {
-                console.error(Erreur lors de la mise à jour du stock pour ${item.nom}:, updateError);
-                throw new Error(Échec de la mise à jour du stock pour ${item.nom}.);
+                console.error(`Erreur lors de la mise a jour du stock pour ${item.nom}:`, updateError);
+                throw new Error(`Echec de la mise a jour du stock pour ${item.nom}.`);
             }
-            console.log(Stock mis à jour pour ${item.nom}: ${newStock});
+            // console.log(`Stock mis a jour pour ${item.nom}: ${newStock}`);
         }
 
+        function openPaymentMethodSelectionModal() {
+            loadCartFromStorage();
+            if (cart.length === 0) {
+                alert("Votre panier est vide. Redirection vers l'accueil.");
+                window.location.href = 'index.html';
+                return;
+            }
+            currentOrderTotal = calculateTotal();
+            if (currentOrderTotal <= 0) {
+                errorNoticeElement.textContent = "Le total de la commande est invalide. Veuillez verifier votre panier.";
+                errorNoticeElement.style.display = 'block';
+                return;
+            }
+
+            if(submitOrderButton) submitOrderButton.disabled = true;
+            errorNoticeElement.style.display = 'none';
+
+            modalContentContainer.innerHTML = `
+                <h2>Choisir un mode de paiement</h2>
+                <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #333;">Montant total : <strong>$${currentOrderTotal.toFixed(2)}</strong></p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button class="modal-btn payment-method-btn" data-method="mpesa">Mpesa</button>
+                    <button class="modal-btn payment-method-btn" data-method="airtelmoney">AirtelMoney</button>
+                    <button class="modal-btn payment-method-btn" data-method="orangemoney">OrangeMoney</button>
+                    <button class="modal-btn payment-method-btn" data-method="visacard">Visa Card</button>
+                </div>
+            `;
+            document.querySelectorAll('.payment-method-btn').forEach(button => {
+                button.addEventListener('click', handlePaymentMethodChoice);
+            });
+            paymentModalOverlay.style.display = 'flex';
+        }
+
+        function handlePaymentMethodChoice(event) {
+            const method = event.target.dataset.method;
+            const methodDisplayNames = {
+                mpesa: "Mpesa",
+                airtelmoney: "Airtel Money",
+                orangemoney: "Orange Money"
+            };
+
+            if (['mpesa', 'airtelmoney', 'orangemoney'].includes(method)) {
+                displayMobilePaymentForm(methodDisplayNames[method], currentOrderTotal);
+            } else if (method === 'visacard') {
+                displayCardPaymentForm(currentOrderTotal);
+            }
+        }
+
+        function displayMobilePaymentForm(methodDisplayName, total) {
+            modalContentContainer.innerHTML = `
+                <h2>Paiement par ${methodDisplayName}</h2>
+                <p style="margin-bottom: 15px; text-align:center;">Montant a payer: <strong>$${total.toFixed(2)}</strong></p>
+                <div class="form-group">
+                    <label for="modalPhoneNumber">Numero de telephone *</label>
+                    <input type="tel" id="modalPhoneNumber" name="modalPhoneNumber" required>
+                </div>
+                <button id="validateModalPaymentButton" class="btn-submit" style="width:100%; margin-top:10px;">Valider le paiement</button>
+                <button id="modalBackButton" class="modal-btn modal-btn-secondary" style="width:100%; margin-top:10px;">Retour</button>
+                <div id="modalErrorNotice" class="error-notice" style="display: none;"></div>
+            `;
+            document.getElementById('modalBackButton').addEventListener('click', openPaymentMethodSelectionModal);
+            document.getElementById('validateModalPaymentButton').addEventListener('click', () => {
+                const phoneNumber = document.getElementById('modalPhoneNumber').value;
+                const modalError = document.getElementById('modalErrorNotice');
+                if (!phoneNumber.trim()) {
+                    modalError.textContent = "Veuillez entrer un numero de telephone.";
+                    modalError.style.display = 'block';
+                    return;
+                }
+                modalError.style.display = 'none';
+                proceedToFinalizeOrder(methodDisplayName);
+            });
+        }
+
+        function displayCardPaymentForm(total) {
+            modalContentContainer.innerHTML = `
+                <h2>Paiement par Carte Visa</h2>
+                <p style="margin-bottom: 15px; text-align:center;">Montant a payer: <strong>$${total.toFixed(2)}</strong></p>
+                <div class="form-group">
+                    <label for="modalCardNumber">Numero de carte *</label>
+                    <input type="text" id="modalCardNumber" name="modalCardNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalExpiryDate">Date d'expiration (MM/AA) *</label>
+                    <input type="text" id="modalExpiryDate" name="modalExpiryDate" placeholder="MM/AA" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalCVV">CVV *</label>
+                    <input type="text" id="modalCVV" name="modalCVV" required>
+                </div>
+                <button id="validateModalPaymentButton" class="btn-submit" style="width:100%; margin-top:10px;">Valider le paiement</button>
+                <button id="modalBackButton" class="modal-btn modal-btn-secondary" style="width:100%; margin-top:10px;">Retour</button>
+                <div id="modalErrorNotice" class="error-notice" style="display: none;"></div>
+            `;
+            document.getElementById('modalBackButton').addEventListener('click', openPaymentMethodSelectionModal);
+            document.getElementById('validateModalPaymentButton').addEventListener('click', () => {
+                const cardNumber = document.getElementById('modalCardNumber').value;
+                const expiryDate = document.getElementById('modalExpiryDate').value;
+                const cvv = document.getElementById('modalCVV').value;
+                const modalError = document.getElementById('modalErrorNotice');
+
+                if (!cardNumber.trim() || !expiryDate.trim() || !cvv.trim()) {
+                    modalError.textContent = "Veuillez remplir tous les champs de la carte.";
+                    modalError.style.display = 'block';
+                    return;
+                }
+                modalError.style.display = 'none';
+                proceedToFinalizeOrder('Visa Card');
+            });
+        }
 
         checkoutForm.addEventListener('submit', async function(event) {
             event.preventDefault();
-            errorNoticeElement.style.display = 'none'; 
-            errorNoticeElement.textContent = ''; // Vider ancien message
-            submitOrderButton.disabled = true;
-            submitOrderButton.innerHTML = 'Traitement... <i class="fas fa-spinner fa-spin"></i>';
+            errorNoticeElement.style.display = 'none';
+            errorNoticeElement.textContent = '';
+
+            const fullNameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
+
+            let isValid = true;
+            if (!fullNameInput.value.trim()) {
+                errorNoticeElement.textContent = "Le nom complet est requis.";
+                isValid = false;
+            } else if (!emailInput.value.trim()) {
+                errorNoticeElement.textContent = "L'adresse e-mail est requise.";
+                isValid = false;
+            } else if (!emailInput.checkValidity()) {
+                errorNoticeElement.textContent = "Veuillez entrer une adresse e-mail valide.";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                errorNoticeElement.style.display = 'block';
+                return;
+            }
+            openPaymentMethodSelectionModal();
+        });
+
+        async function proceedToFinalizeOrder(paymentMethod) {
+            const validateButton = document.getElementById('validateModalPaymentButton');
+            const modalErrorNotice = document.getElementById('modalErrorNotice');
+
+            if (validateButton) {
+                validateButton.disabled = true;
+                validateButton.innerHTML = 'Traitement... <i class="fas fa-spinner fa-spin"></i>';
+            }
+            if (modalErrorNotice) modalErrorNotice.style.display = 'none';
 
             try {
-                // Re-vérifier le panier ici au cas où il aurait été modifié dans un autre onglet
-                loadCartFromStorage(); 
+                loadCartFromStorage();
                 if (cart.length === 0) {
                     throw new Error("Votre panier est vide. Impossible de passer la commande.");
                 }
@@ -354,57 +620,83 @@
                 const stockUpdatePromises = cart.map(item => updateStockForOrderItem(item));
                 await Promise.all(stockUpdatePromises);
 
-                // Simulation de l'enregistrement de la commande
-                // Dans une vraie application, vous enverriez les données du formulaire et du panier à votre backend/Supabase
-                console.log("Commande soumise avec les données suivantes:");
                 const formData = new FormData(checkoutForm);
+                const orderId = `CMD-${Date.now().toString().slice(-6)}`;
                 const orderDetails = {
+                    id: orderId, // Ajouter un ID � la commande elle-m�me
                     customer_name: formData.get('fullName'),
                     customer_email: formData.get('email'),
                     shipping_address: formData.get('address') || 'Non fournie',
                     items: cart.map(item => ({ id: item.id, nom: item.nom, quantity: item.quantity, prix_unitaire: item.prix })),
                     total_amount: calculateTotal(),
-                    order_date: new Date().toISOString()
+                    order_date: new Date().toISOString(),
+                    payment_method: paymentMethod,
+                    status: "Nouvelle commande" // Statut initial
                 };
-                console.log(orderDetails);
 
-                // Ici, vous inséreriez orderDetails dans une table 'commandes' de Supabase
-                // Exemple (à adapter avec votre structure de table 'commandes'):
+                // Enregistrer la notification dans localStorage
+                let notifications = JSON.parse(localStorage.getItem('userNotifications')) || [];
+                const newNotification = {
+                    id: orderId, // Utiliser l'ID de commande pour la notification
+                    title: `Commande ${orderId} validee`,
+                    message: `Votre commande d'un montant de $${orderDetails.total_amount.toFixed(2)} a bien ete enregistree.`,
+                    date: new Date().toISOString(),
+                    details: orderDetails, // Sauvegarder tous les d�tails pour affichage futur
+                    read: false
+                };
+                notifications.unshift(newNotification); // Ajouter au d�but de la liste
+                localStorage.setItem('userNotifications', JSON.stringify(notifications));
+                console.log("Notification de commande sauvegardee localement:", newNotification);
+
                 /*
+                // Vous pourriez toujours vouloir enregistrer la commande dans Supabase ici
                 const { data: orderData, error: orderError } = await supabaseClient
-                    .from('commandes') // Remplacez par le nom de votre table de commandes
+                    .from('commandes') // Assurez-vous que cette table existe
                     .insert([orderDetails])
                     .select();
 
                 if (orderError) {
-                    throw new Error(Erreur lors de l'enregistrement de la commande: ${orderError.message});
+                    // Si l'enregistrement Supabase �choue, vous pourriez vouloir annuler la mise � jour du stock ou g�rer l'erreur.
+                    // Pour l'instant, on logue l'erreur.
+                    console.error(`Erreur lors de l'enregistrement de la commande dans Supabase: ${orderError.message}`);
+                    // Vous pourriez choisir de ne pas afficher le message de remerciement si ceci �choue.
+                } else {
+                    console.log("Commande enregistree avec succes dans Supabase:", orderData);
                 }
-                console.log("Commande enregistrée avec succès:", orderData);
                 */
 
-
                 localStorage.removeItem('shoppingCart');
-                cart = []; 
+                cart = [];
 
-                simulatedOrderNumberElement.textContent = CMD-${Date.now().toString().slice(-6)};
+                simulatedOrderNumberElement.textContent = orderId;
                 checkoutContainer.style.display = 'none';
                 thankYouContainer.style.display = 'block';
+                closeModal();
 
             } catch (error) {
-                console.error("Erreur lors du traitement de la commande:", error);
-                errorNoticeElement.textContent = error.message || "Une erreur est survenue lors de la finalisation de la commande. Veuillez réessayer.";
-                errorNoticeElement.style.display = 'block';
-                // Ne pas réactiver le bouton immédiatement si l'erreur est due au stock, 
-                // car l'utilisateur doit corriger son panier.
-                // Si c'est une autre erreur (ex: réseau), on pourrait le réactiver.
-                // Pour l'instant, on le laisse désactivé pour forcer l'utilisateur à agir.
-                // Ou réactiver pour permettre une nouvelle tentative :
-                submitOrderButton.disabled = false;
-                submitOrderButton.innerHTML = 'Passer la commande';
-            }
-        });
+                console.error("Erreur lors du traitement final de la commande:", error);
+                let errorMessage = error.message || "Une erreur est survenue. Veuillez reessayer.";
+                errorMessage = errorMessage.replace(/�|�|�|�/g, 'e').replace(/�|�/g, 'a').replace(/�/g, 'c').replace(/�|�/g, 'u').replace(/�/g, 'o').replace(/�|�/g, 'i');
+                errorMessage = errorMessage.replace(/�|�|�|�/g, 'E').replace(/�|�/g, 'A').replace(/�/g, 'C').replace(/�|�/g, 'U').replace(/�/g, 'O').replace(/�|�/g, 'I');
 
-        // Assurer que le résumé est affiché au chargement de la page
+                if (modalErrorNotice) {
+                    modalErrorNotice.textContent = errorMessage;
+                    modalErrorNotice.style.display = 'block';
+                } else {
+                    errorNoticeElement.textContent = errorMessage;
+                    errorNoticeElement.style.display = 'block';
+                }
+
+                if (validateButton) {
+                    validateButton.disabled = false;
+                    validateButton.innerHTML = 'Valider le paiement';
+                } else {
+                    submitOrderButton.disabled = false;
+                    submitOrderButton.innerHTML = 'Passer la commande';
+                }
+            }
+        }
+
         if (checkoutContainer.style.display !== 'none') {
             renderOrderSummary();
         }
